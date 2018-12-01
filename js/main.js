@@ -25,7 +25,7 @@ function boot_preload() {
     for (let i in js_load)
         this.load.script('js/' + js_load[i]);
 
-    let img_load = ['background_birth', 'prison', 'cellmate'];
+    let img_load = ['background_birth', 'prison', 'cellmate', 'background_life'];
     for (let i in img_load)
         this.load.image(img_load[i], 'src/' + img_load[i] + '.png');
 

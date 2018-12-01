@@ -30,10 +30,42 @@ Story.prototype.actions = {
             story.prison.background.destroy();
             story.prison = null;
             story.decrease_speed = 1;
-            background.scrolling = true;
+            background.background.destroy();
             // new background
+            background = new BackgroundSeqment(context, 'background_life');
+            character.sprite.setDepth(10000);
             new TransitionBlockingFrom(context);
         });
+    },
+    167: function(context) {
+        new TransitionBlockingTo(context, function() {
+            // change to hospital
+            story.hospital = new Hospital(context);
+            background.scrolling = false;
+
+            character.number.setDepth(1000);
+            forward_button.setDepth(1000);
+
+            story.decrease_speed = 2;
+            new TransitionBlockingFrom(context);
+        });
+    },
+
+    200: function(context) {
+        new TransitionBlockingTo(context, function() {
+            // change to hospital
+            background.scrolling = false;
+
+            character.number.setDepth(1000);
+            forward_button.setDepth(1000);
+
+            story.decrease_speed = 2;
+            background.background.destroy();
+            new TransitionBlockingFrom(context);
+        });
+    },
+    201: function(context) {
+        new TransitionBlockingTo(context, function() { });        
     }
 };
 
@@ -54,19 +86,18 @@ Story.prototype.texts = {
     // 56 : {t: "In school they told you to beware of sociopaths.\n", e: 2},
     // 58 : {t: "Could it be? Of course not.\nA sociopath wouldn't self-reflect whether he is one.", e: 2},
     // 60 : {t: "You decided not to think too much about it.", e: 2},
-    39 : {t: "What could they mean?\nAre you the only one who sees them?", e: 2},
+    39 : {t: "What did they mean?\nWere you the only one who sees them?", e: 2},
     42 : {t: "They were always decreasing.\nThey dropped rapidly when you made\na life changing decision.", e: 3},
-    46 : {t: "You were fascinated by this.", e: 2},
-    48 : {t: "Months went by.", e: 1},
-    49 : {t: "It's 1969.", e: 2},
+    // 46 : {t: "You were fascinated by this.", e: 2},
+    48 : {t: "Months went by. It's 1969.", e: 3},
     51 : {t: "The era of normalization begins\nin Czechoslovakia.", e: 3},
-    54 : {t: "You were very active in anti-regime origneted groups.", e: 2},
-    57 : {t: "All was silent for several weeks.", e: 2},
+    54 : {t: "You were very active in anti-regime oriented groups.", e: 2},
+    58 : {t: "All was silent for several weeks.", e: 2},
     61 : {t: "One of your classmates found some antiregime\nessays you wrote the previous year.", e: 3},
     64 : {t: "It escalated soon.", e: 2},
     66 : {t: "You were summoned for questioning.", e: 2},
     68 : {t: "You were afraid.", e: 2},
-    71 : {t: "It wasn't enough.\nYou went to prison for treason.", e: 2},
+    71 : {t: "It wasn't enough.\nYou went to prison for  .", e: 2},
     78 : {t: "You were assured that this is only temporary.", e: 2},
     82 : {t: "Days.", e: 2},
     86 : {t: "Weeks.", e: 3},
@@ -79,6 +110,25 @@ Story.prototype.texts = {
     116 : {t: "At that moment it dawned on you.\nYou became anxious.", e: 3},
     120 : {t: "A week later he disappeared.", e: 2},
     123 : {t: "A week after that you were released.", e: 2},
+    129 : {t: "It took you a while to get\nused to regular life again.", e: 3},
+    140 : {t: "You came up with a hypothesis that\nstaying home would stop decreasing\nthe number so rapidly.", e: 3},
+    145 : {t: "An old friend of yours got into trouble.\nHe asked you for some money.\nIt was 2 years worth of salary.", e: 3},
+    151 : {t: "You felt lonely.\nYou tried to find a solution.", e: 3},
+    160 : {t: "You grew old.", e: 2},
+    164 : {t: "You started having problems\nwith your lungs.", e: 2},
+    167 : {t: "You spent the last year in a hospital.", e: 2},
+    171 : {t: "Now you're reflecting your life.", e: 2},
+    173 : {t: "You sought affection, yet were\nunable to provide it to other people.", e: 3},
+    173 : {t: "You complained that nobody understands you,\nyet you haven't understood anyone yourself.", e: 3},
+    173 : {t: "You tried to keep your number\nas high as possible.", e: 2},
+    173 : {t: "You didn't have a family.", e: 2},
+    173 : {t: "You didn't have a proper hobby.", e: 2},
+    173 : {t: "You didn't travel.", e: 2},
+    173 : {t: "You didn't like arts.", e: 2},
+    173 : {t: "You were lonely.", e: 2},
+    173 : {t: "You cared only about the number.", e: 2},
+    173 : {t: "only the number", e: 2}, 
+    173 : {t: "Was it worth it?", e: 100},
 };
 
 // You lie to 
@@ -88,9 +138,9 @@ Story.prototype.choices = {
         {t: 'Mommy', r2: 'mommy'},
         {t: 'Daddy', r2: 'daddy'}]
     },
-    45: {t: 'You decide to:', r1: 'classmates_numbers', v: [
-        {t: 'ask them what do the numbers mean.', r2: 'ask'},
-        {t: 'try not to think about it too much.', r2: 'dont_think'}]
+    45: {t: 'You decide to', r1: 'classmates_numbers', v: [
+        {t: 'ask them what do the numbers mean', r2: 'ask'},
+        {t: 'try not to think about it too much', r2: 'dont_think'}]
     },
     // 50: {t: 'In your free time:', v: [
     //     {t: 'you enjoyed sports', r1: 'free_time', r2: 'sports'},
@@ -98,16 +148,38 @@ Story.prototype.choices = {
     //     {t: 'wrote naive poems', r1: 'free_time', r2: 'poems'},
     //     {t: 'spent time with your friends', r1: 'free_time', r2: 'friends'}]
     // },
-    58: {t: "You", r1: 'invasion', v: [
-        {t: "tried to sever all connections with these people.", r2: 'sever'},
-        {t: "became ever more active.", r2: 'active'},
-        {t: "did nothing. It would soon be over.", r2: 'nothing'}]
+    56: {t: "You", r1: 'invasion', v: [
+        {t: "tried to sever all connections with these people", r2: 'sever'},
+        {t: "became ever more active", r2: 'active'},
+        {t: "did nothing. It would soon be over", r2: 'nothing'}]
     },
     70: {t: "They asked you why you wrote the essays.", r1: 'questioning', v: [
         {t: "You tried to explain that you were right.", r2: 'right'},
         {t: "You tried to apologize for everything.", r2: 'amends'},
         {t: "You tried to evoke compassion.", r2: 'compassion'}]
     },
+    134: {t: "You chose to:", r1: 'life_what', v: [
+        {t: "find a temporary job", r2: 'amends'},
+        {t: "study a technical university\n    (will decrease your number)", r2: 'job'}]
+    },
+    136: {t: "At the same time you moved:", r1: 'moved', v: [
+        {t: "to a flat in Prague", r2: 'city'},
+        {t: "to a small village nearby", r2: 'village'}]
+    },
+    141: {t: "You decided", r1: 'illness', v: [
+        {t: "to stay home.", r2: 'city'},
+        {t: "to not worry.", r2: 'village'}]
+    },
+    149: {t: "You", r1: 'friend_money', v: [
+        {t: "gave him the money", r2: 'city'},
+        {t: "came up with an excuse", r2: 'village'}]
+    },
+    151: {t: "You", r1: 'lonely', v: [
+        {t: "stayed alone", r2: 'alone'},
+        {t: "married", r2: 'marry'},
+        {t: "found a lover", r2: 'lover'}]
+    },
+
 }
 
 Story.prototype.results = {};
@@ -182,14 +254,24 @@ Story.prototype.choose = function(key, res) {
     } else if(key == 'classmates_numbers') {
         character.safe_decrease(6, true);
         if(res == 'ask')
-            this.texts[44] = {t: "They told you they don't know\nwhat you're talking about.", e: 2};
+            this.texts[46] = {t: "They told you they don't know\nwhat you're talking about.", e: 2};
         else
-            this.texts[44] = {t: "You decided not to worry too much.\nThis granted you several months of mental peace.", e: 2};
+            this.texts[46] = {t: "You decided not to worry too much.\nThis granted you several months of mental peace.", e: 2};
     } else if(key == 'free_time') {
         character.safe_decrease(6, true);
     } else if(key == 'invasion') {
         character.safe_decrease(13, true);
     } else if(key == 'questioning') {
         character.safe_decrease(13, true);
+    } else if(key == 'life_what') {
+        character.safe_decrease(11, true);
+    } else if(key == 'moved') {
+        character.safe_decrease(11, true);
+    } else if(key == 'illness') {
+        character.safe_decrease(11, true);
+    } else if(key == 'friend_money') {
+        character.safe_decrease(11, true);
+    } else if(key == 'lonely') {
+        character.safe_decrease(11, true);
     }
 }

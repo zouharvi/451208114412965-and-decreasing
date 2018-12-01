@@ -37,9 +37,6 @@ function TransitionBlockingTo(context, callback) {
     })
 }
 
-
-
 BackgroundSeqment.prototype.try_scroll = function(context) {
-    if(scrolling)
-        this.background.x -= 0.6/AR;
+    this.background.x -= 0.6/AR;
 };
