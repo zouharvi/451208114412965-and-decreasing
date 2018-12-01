@@ -5,6 +5,7 @@ let STYLES = {
     game_option: { font: '20px PT Serif', color: '#dfdfdf' },
     overhead_number_main: { font: '30px PT Serif', color: '#111111' },
     story_text: { font: '17px PT Serif', color: '#111111' },
+    story_text_last: { font: '17px PT Serif', color: '#cccccc' },
     story_text_resp: { font: '17px PT Serif', color: '#111111', align:'right' },
 }
 

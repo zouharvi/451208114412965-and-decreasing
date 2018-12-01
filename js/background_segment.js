@@ -37,6 +37,44 @@ function TransitionBlockingTo(context, callback) {
     })
 }
 
+
+function TransitionBlockingToGray(context, callback) {
+    let rect = new Phaser.Geom.Rectangle(0, 0, 1000, 1000);
+    graphics = context.add.graphics({ fillStyle: { color: 0x111111 } });
+    graphics.fillRectShape(rect);
+
+    // graphics.setDepth(10000);
+    graphics.alpha = 0;
+
+    context.add.tween({
+        targets: graphics,
+        duration: 1000*AR,
+        alpha: 1,
+        onComplete: function() {
+            callback(context);
+        }
+    })
+}
+
+function TransitionBlockingToBlack(context, callback) {
+    let rect = new Phaser.Geom.Rectangle(0, 0, 1000, 1000);
+    graphics = context.add.graphics({ fillStyle: { color: 0x000000 } });
+    graphics.fillRectShape(rect);
+
+    // graphics.setDepth(10000);
+    graphics.alpha = 0;
+
+    context.add.tween({
+        targets: graphics,
+        duration: 1000*AR,
+        alpha: 1,
+        onComplete: function() {
+            callback(context);
+        }
+    })
+}
+
+
 BackgroundSeqment.prototype.try_scroll = function(context) {
     this.background.x -= 0.6/AR;
 };

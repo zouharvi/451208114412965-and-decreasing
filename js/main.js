@@ -20,12 +20,12 @@ var AR = 0.8;
 function boot_preload() {
     // SHRUG
 
-    let js_load = ['character', 'background_segment', 'game', 'story', 'choice', 'single/prison', 'single/cellmate'];
+    let js_load = ['character', 'background_segment', 'game', 'story', 'choice', 'single/prison', 'single/cellmate', 'single/hospital'];
 
     for (let i in js_load)
         this.load.script('js/' + js_load[i]);
 
-    let img_load = ['background_birth', 'prison', 'cellmate', 'background_life'];
+    let img_load = ['background_birth', 'prison', 'cellmate', 'background_life', 'hospital'];
     for (let i in img_load)
         this.load.image(img_load[i], 'src/' + img_load[i] + '.png');
 
@@ -34,6 +34,9 @@ function boot_preload() {
     for (let i in spritesheet_load)
         this.load.spritesheet(spritesheet_load[i].name, 'src/' + spritesheet_load[i].name + '.png', spritesheet_load[i].params);
     
+
+    this.load.audio('main_music', 'src/main.ogg');
+
 
     let loading_value = META.name_int + js_load.length + img_load.length;
     let loading_text = this.loading_text = this.add.text(20, 30, loading_value, STYLES.loading);
@@ -78,6 +81,10 @@ var character, background, story;
 var forward_button;
 
 function game_create() {
+    music = this.sound.add('main_music', {volume: 0.4});
+    music.loop = true;
+    music.play();
+
     background = new BackgroundSeqment(this, 'background_birth');
     character = new Character(this, 0);
     forward_button = this.add.text(600, 263, "forward", STYLES.game_option).setInteractive({ cursor: 'pointer' });

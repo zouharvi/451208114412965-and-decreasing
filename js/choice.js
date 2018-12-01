@@ -2,7 +2,7 @@ Choice = function(context, a) {
     this.group = [];
     this.group_d = context.add.group();
 
-    this.question = context.add.text(400, 48, a.t, STYLES.story_text); 
+    this.question = context.add.text(400, 41, a.t, STYLES.story_text); 
     this.question.alpha = 0;
     context.add.tween({
         targets: this.question,
@@ -14,7 +14,7 @@ Choice = function(context, a) {
     
     for(i in a.v) {
         let o = a.v[i];
-        let choice_text = context.add.text(400, 80+i*25, '  ' + o.t, STYLES.story_text_resp);
+        let choice_text = context.add.text(400, 73+i*25, '  ' + o.t, STYLES.story_text_resp);
         choice_text.setInteractive({ cursor: 'pointer' });
         choice_text.choice_i = i;
         choice_text.choice_r2 = o.r2;
@@ -60,7 +60,7 @@ Choice.prototype.fade = function(context) {
     for(let i in this.group) {
         context.add.tween({
             targets: this.group[i],
-            duration: (i == this.choice_i) ? 1500*AR : 1000*AR,
+            duration: (i == this.choice_i) ? 1800*AR : 1000*AR,
             alpha: 0,
         });
     }
