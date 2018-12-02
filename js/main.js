@@ -78,10 +78,10 @@ function boot_create() {
 }
 
 var character, background, story;
-var forward_button;
+var forward_button, music;
 
 function game_create() {
-    music = this.sound.add('main_music', {volume: 0.4});
+    music = this.sound.add('main_music', {volume: 0.9});
     music.loop = true;
     music.play();
 

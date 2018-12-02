@@ -12,7 +12,8 @@ Story.prototype.actions = {
             character.number.setDepth(1000);
             forward_button.setDepth(1000);
 
-            story.decrease_speed = 10;
+            story.decrease_speed = 12;
+            
             new TransitionBlockingFrom(context);
         });
     },
@@ -33,7 +34,7 @@ Story.prototype.actions = {
         new TransitionBlockingTo(context, function(){
             story.prison.background.destroy();
             story.prison = null;
-            story.decrease_speed = 4;
+            story.decrease_speed = 5;
             background.background.destroy();
             // new background
             background = new BackgroundSeqment(context, 'background_life');
@@ -51,7 +52,7 @@ Story.prototype.actions = {
             character.sprite.setPosition(0,-10000);
             forward_button.setDepth(1000);
 
-            story.decrease_speed = 10;
+            story.decrease_speed = 12;
             new TransitionBlockingFrom(context);
         });
     },
@@ -80,6 +81,11 @@ Story.prototype.actions = {
                 targets: character.number,
                 duration: 1000*AR,
                 alpha: 0,
+            })
+            context.add.tween({
+                targets: music,
+                duration: 1000*AR,
+                volume: 0,
             })
         });
     },
@@ -147,7 +153,7 @@ Story.prototype.texts = {
     185 : {t: "You were lonely.", e: 2},
     187 : {t: "You cared only about the number.", e: 2},
     189 : {t: "only the number", e: 2}, 
-    195 : {t: "Was it worth it?", e: 5},
+    195 : {t: "Was it worth it?", e: 6},
 };
 
 // You lie to 
@@ -280,19 +286,19 @@ Story.prototype.choose = function(key, res) {
         else
             this.texts[46] = {t: "You decided not to worry too much.\nThis granted you several months of mental peace.", e: 2};
     } else if(key == 'free_time') {
-        character.safe_decrease(10, true);
+        character.safe_decrease(11, true);
     } else if(key == 'invasion') {
         character.safe_decrease(14, true);
     } else if(key == 'questioning') {
         character.safe_decrease(14, true);
     } else if(key == 'life_what') {
-        character.safe_decrease(13, true);
+        character.safe_decrease(14, true);
     } else if(key == 'moved') {
         character.safe_decrease(13, true);
     } else if(key == 'illness') {
-        character.safe_decrease(13, true);
+        character.safe_decrease(14, true);
     } else if(key == 'friend_money') {
-        character.safe_decrease(13, true);
+        character.safe_decrease(14, true);
     } else if(key == 'lonely') {
         character.safe_decrease(13, true);
     }

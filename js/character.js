@@ -63,5 +63,5 @@ Character.prototype.safe_kill = function() {
 }
 
 Character.prototype.update_counter = function() {
-    this.number.setText(this.life_number); 
+    this.number.setText(pad(this.life_number, 15,'0')); 
 }

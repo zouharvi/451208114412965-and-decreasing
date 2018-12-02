@@ -14,6 +14,11 @@ let META = {
     name_str: '451208114412965',
 }
 
+pad = function(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
 
 arrayMin = function(array) {
     return Math.min.apply(null, array);
