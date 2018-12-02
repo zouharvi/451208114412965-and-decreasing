@@ -81,7 +81,7 @@ var character, background, story;
 var forward_button, music;
 
 function game_create() {
-    music = this.sound.add('main_music', {volume: 0.9});
+    music = this.sound.add('main_music', {volume: 1});
     music.loop = true;
     music.play();
 
