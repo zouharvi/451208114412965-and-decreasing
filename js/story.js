@@ -144,7 +144,7 @@ Story.prototype.texts = {
     160 : {t: "You grew old.", e: 2},
     164 : {t: "You started having problems\nwith your lungs.", e: 2},
     166 : {t: "You spent the last year in a hospital.", e: 2},
-    171 : {t: "Now you're reflecting your life.", e: 2},
+    171 : {t: "Now you're reflecting on your life.", e: 2},
     173 : {t: "You sought affection, yet were\nunable to provide it to other people.", e: 3},
     176 : {t: "You complained that nobody understands you,\nyet you haven't understood anyone yourself.", e: 3},
     179 : {t: "You tried to keep your number\nas high as possible.", e: 2},
@@ -153,7 +153,7 @@ Story.prototype.texts = {
     185 : {t: "You were lonely.", e: 2},
     187 : {t: "You cared only about the number.", e: 2},
     189 : {t: "only the number", e: 2}, 
-    195 : {t: "Was it worth it?", e: 6},
+    193 : {t: "Was it worth it?", e: 6},
 };
 
 // You lie to 
@@ -226,7 +226,7 @@ Story.prototype.forward = function(context) {
             this.cur_text.e += text_min;
             delete this.texts[text_min];
             // console.log('creating ' + this.cur_text.t)
-            if(text_min == 195)
+            if(text_min == 193)
                 this.cur_text_obj = context.add.text(400, 42, this.cur_text.t, STYLES.story_text_last); 
             else
                 this.cur_text_obj = context.add.text(400, 42, this.cur_text.t, STYLES.story_text); 
